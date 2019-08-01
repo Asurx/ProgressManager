@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/alpha_blue">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_work"
+            android:text="Hello World!"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <!--<EditText-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/et_weight"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--/>-->
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_del"
+            android:text="Del"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    <com.asurx.progressmanager.MyProgressView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/pv"/>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="95dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_current_1"
+            android:text="current: "
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginVertical="5dp"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/btn_reduce_current"/>
+        <EditText
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_current"
+            android:layout_marginLeft="20dp"
+
+            android:layout_marginVertical="5dp"
+
+            android:layout_toRightOf="@id/tv_current_1"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/btn_reduce_current"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_current_2"
+            android:text="个单位"
+            android:layout_marginLeft="20dp"
+
+            android:layout_marginVertical="5dp"
+
+            android:layout_toRightOf="@id/et_current"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/btn_reduce_current"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_total_1"
+            android:text="total: "
+            android:layout_marginRight="20dp"
+
+            android:layout_marginVertical="5dp"
+
+            android:layout_toLeftOf="@id/et_total"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/btn_add_total"/>
+        <EditText
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_total"
+            android:layout_marginRight="20dp"
+
+            android:layout_marginVertical="5dp"
+
+            android:layout_toLeftOf="@id/tv_total_2"
+
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/btn_add_total" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_total_2"
+            android:text="个单位"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+
+            android:layout_marginVertical="5dp"
+
+            android:layout_alignParentRight="true"
+
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/btn_add_total"/>
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/btn_reduce_current"
+            android:text="-"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"            />
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/btn_add_current"
+            android:text="+"
+
+            android:layout_marginLeft="80dp"
+            android:layout_marginBottom="10dp"
+
+            android:layout_toRightOf="@id/btn_reduce_current"
+            android:layout_alignParentBottom="true" />
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/btn_reduce_total"
+
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="10dp"
+
+            android:layout_toLeftOf="@id/btn_add_total"
+            android:layout_alignParentBottom="true"
+            android:text="-" />
+        <Button
+            android:id="@+id/btn_add_total"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="+"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
