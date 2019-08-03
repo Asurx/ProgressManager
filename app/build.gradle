@@ -8,14 +8,14 @@ android {
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     android.applicationVariants.all {
         variant ->
             variant.outputs.all {
                 // 此处指定生成的apk文件名
-                outputFileName = "ProgressManagerDemo-0.apk"
+                outputFileName = "ProgressManagerDemo-1.apk"
             }
     }
     buildTypes {

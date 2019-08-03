@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         init();
 
         initDBWork();
+        updatePbUnit();
 
         initPopWin();
         setSupportActionBar(toolbar);
@@ -101,10 +102,18 @@ public class MainActivity extends AppCompatActivity {
 
     //--------------------------------------------------------------------------------------------//
     //--------------------------------------------------------------------------------------------//
-    private int totalUnit = 0;
-    private int currentUnit = 0;
     private MyProgressView pb;
     private void updatePbUnit(){
+        int totalUnit = 0;
+        int currentUnit = 0;
+        for(int i=0;i <= workId; i++){
+            if(workIdList.contains(i)){
+                Log.e("update pb"," " + i);
+                totalUnit   += works[i].total * works[i].weight;
+                currentUnit += works[i].current * works[i].weight;
+            }
+        }
+
         pb.setProgress(((float)currentUnit/totalUnit));
     }
 
@@ -204,47 +213,26 @@ public class MainActivity extends AppCompatActivity {
     private void addWork(MyWork mWork){
         int mWorkId = mWork.getId();
         works[mWorkId] = mWork;
-
-//        Log.e("worksId",String.valueOf(mWork.getId()));
-//        Log.e("worksName",String.valueOf(mWork.getName()));
-//        Log.e("worksCurrent",String.valueOf(mWork.getCurrent()));
-//        Log.e("worksTotal",String.valueOf(mWork.getTotal()));
-//        Log.e("worksWeight",String.valueOf(mWork.getWeight()));
-//
-//        Log.e("addWorksId",String.valueOf(works[mWorkId].getId()));
-//        Log.e("addWorksName",String.valueOf(works[mWorkId].getName()));
-//        Log.e("addWorksCurrent",String.valueOf(works[mWorkId].getCurrent()));
-//        Log.e("addWorksTotal",String.valueOf(works[mWorkId].getTotal()));
-//        Log.e("addWorksWeight",String.valueOf(works[mWorkId].getWeight()));
-
-//        works[mWorkId].id = mWork.id;
-//        works[mWorkId].name = mWork.name;
-//        works[mWorkId].current = mWork.current;
-//        works[mWorkId].total = mWork.total;
-//        works[mWorkId].weight = mWork.weight;
-//        works[mWorkId].setId(mWorkId);//下标 <==> Id
-//        works[mWorkId].setName(mWork.getName());
-//        works[mWorkId].setCurrent(mWork.getCurrent());
-//        works[mWorkId].setTotal(mWork.getTotal());
-//        works[mWorkId].setWeight(mWork.getWeight());
-
         workIdList.add(mWorkId);
-        totalUnit   += mWork.getTotal()   * mWork.getWeight();
-        currentUnit += mWork.getCurrent() * mWork.getWeight();
+//        totalUnit   += mWork.getTotal()   * mWork.getWeight();
+//        currentUnit += mWork.getCurrent() * mWork.getWeight();
         updatePbUnit();
 
         generateWorkView(mWorkId);
         initWorkView(mWorkId);
     }
     private void delWork(int id){
-        for(int i=0;i<workIdList.size();i++){
-            if(workIdList.get(i) == id) {
-                workIdList.remove(i);
+        while(workIdList.contains(id)) {
+            for (int i = 0; i < workIdList.size(); i++) {
+                if (workIdList.get(i) == id) {
+                    workIdList.remove(i);
+
+                    Log.e("delWork", "Deleted index: " + i + "\tid: " + id);
+                }
             }
         }
         deletedWorkIdList.add(id);
-        totalUnit   -= works[id].getTotal()   * works[id].getWeight();
-        currentUnit -= works[id].getCurrent() * works[id].getWeight();
+        Log.e("delWork","" + workIdList.contains(id));
         updatePbUnit();
         llContainer.removeView(workViews[id].workViewContainer);
         String whereClause = "NUMBER = ?";
@@ -279,18 +267,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateWorkView(int mWorkId){
         MyWork mWork = works[mWorkId];
-//        Log.e("worksId",String.valueOf(mWork.getId()));
-//        Log.e("worksName",String.valueOf(mWork.getName()));
-//        Log.e("worksCurrent",String.valueOf(mWork.getCurrent()));
-//        Log.e("worksTotal",String.valueOf(mWork.getTotal()));
-//        Log.e("worksWeight",String.valueOf(mWork.getWeight()));
 
         LinearLayout      workViewContainer;
         RelativeLayout    relativeLayout1,relativeLayout2;
 
         TextView          tv_name,tv_current_1,tv_current_2,tv_total_1,tv_total_2,tv_weight;
         EditText          et_current,et_total;
-        Button            btn_del,btn_reduce_current,btn_add_current,btn_reduce_total,btn_add_total;
+        Button            btn_del,btn_reduce_weight,btn_add_weight,btn_reduce_current,btn_add_current,btn_reduce_total,btn_add_total;
         MyProgressView    pv;
     //--------------------------------------------------------------------------------------------//
         workViewContainer = new LinearLayout(mContext);//主布局container
@@ -300,8 +283,14 @@ public class MainActivity extends AppCompatActivity {
         relativeLayout2 = new RelativeLayout(mContext);
 
         tv_name   = new TextView(mContext);//名称tv
+
+
+        btn_reduce_weight = new Button(mContext);
         tv_weight = new TextView(mContext);
+        btn_add_weight = new Button(mContext);
+
         btn_del   = new Button(mContext);
+
 
         tv_current_1 = new TextView(mContext);
         et_current = new EditText(mContext);
@@ -318,29 +307,33 @@ public class MainActivity extends AppCompatActivity {
         workViewContainer.setId(mWorkId);
 
         relativeLayout1.setId(mWorkId + 1);
-        pv.setId(mWorkId + 5);
-        relativeLayout2.setId(mWorkId + 6);
+        pv.setId(mWorkId + 7);
+        relativeLayout2.setId(mWorkId + 8);
 
         tv_name.setId(mWorkId + 2);
-        tv_weight.setId(mWorkId + 3);
-        btn_del.setId(mWorkId + 4);
+        btn_reduce_weight.setId(mWorkId + 3);
+        tv_weight.setId(mWorkId + 4);
+        btn_add_weight.setId(mWorkId + 5);
+        btn_del.setId(mWorkId + 6);
 
-        tv_current_1.setId(mWorkId + 7);
-        et_current.setId(mWorkId + 8);
-        tv_current_2.setId(mWorkId + 9);
-        tv_total_1.setId(mWorkId + 10);
-        et_total.setId(mWorkId + 11);
-        tv_total_2.setId(mWorkId + 12);
+        tv_current_1.setId(mWorkId + 8);
+        et_current.setId(mWorkId + 9);
+        tv_current_2.setId(mWorkId + 11);
+        tv_total_1.setId(mWorkId + 12);
+        et_total.setId(mWorkId + 13);
+        tv_total_2.setId(mWorkId + 14);
 
-        btn_reduce_current.setId(mWorkId + 13);
-        btn_add_current.setId(mWorkId + 14);
-        btn_reduce_total.setId(mWorkId + 15);
-        btn_add_total.setId(mWorkId + 16);
+        btn_reduce_current.setId(mWorkId + 15);
+        btn_add_current.setId(mWorkId + 16);
+        btn_reduce_total.setId(mWorkId + 17);
+        btn_add_total.setId(mWorkId + 18);
 
         pv.setProgress(mWork.getProgress());
 
         tv_name.setText("Name: " + mWork.getName());
+        btn_reduce_weight.setText("-");
         try{ tv_weight.setText("Weight: " + String.valueOf(mWork.getWeight()));}  catch (Exception e){}
+        btn_add_weight.setText("+");
         btn_del.setText("Del");
 
         tv_current_1.setText("Current: ");
@@ -361,7 +354,9 @@ public class MainActivity extends AppCompatActivity {
 
         MyWorkView wv = new MyWorkView(mWork.getId(),workViewContainer,
                 relativeLayout1, pv, relativeLayout2,
-                tv_name,      tv_weight,     btn_del,
+                tv_name,
+                btn_reduce_weight, tv_weight, btn_add_weight,
+                btn_del,
                 tv_current_1, et_current,    tv_current_2,
                 tv_total_1,   et_total,      tv_total_2,
                 btn_reduce_current, btn_add_current, btn_reduce_total, btn_add_total);
@@ -392,6 +387,27 @@ public class MainActivity extends AppCompatActivity {
         params.height= ViewGroup.LayoutParams.WRAP_CONTENT;     //设置宽高
         params.leftMargin = CalFun.dip2px(this,10);//设置左边距
         mWorkView.tv_name.setLayoutParams(params);
+        //--------设置btn_reduce_weight的布局参数--------//
+        mWorkView.relativeLayout1.addView(mWorkView.btn_reduce_weight);
+        params = (RelativeLayout.LayoutParams) mWorkView.btn_reduce_weight.getLayoutParams();
+        params.addRule(RelativeLayout.CENTER_VERTICAL);   //在父控件中垂直居中
+        params.addRule(RelativeLayout.LEFT_OF,mWorkView.tv_weight.getId());
+        params.width = CalFun.dip2px(this,60);
+        params.height= CalFun.dip2px(this,60);      //设置宽高
+        params.rightMargin = CalFun.dip2px(this,10);//设置右边距
+        //--------为btn_reduce_weight添加监听--------//
+        mWorkView.btn_reduce_weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int targetId = mWorkView.id;
+                int num = works[targetId].getWeight() - 1;
+                works[targetId].setWeight(num);
+                updateWork(targetId);
+                updatePbUnit();
+                workViews[targetId].tv_weight.setText("Weight: " + String.valueOf(num));
+            }
+        });
+        mWorkView.btn_reduce_weight.setLayoutParams(params);
         //--------设置tv_weight的布局参数--------//
         mWorkView.relativeLayout1.addView(mWorkView.tv_weight);
         params = (RelativeLayout.LayoutParams) mWorkView.tv_weight.getLayoutParams();
@@ -401,6 +417,27 @@ public class MainActivity extends AppCompatActivity {
         params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         params.height= ViewGroup.LayoutParams.WRAP_CONTENT;//设置宽高
         mWorkView.tv_weight.setLayoutParams(params);
+        //--------设置btn_add_weight的布局参数--------//
+        mWorkView.relativeLayout1.addView(mWorkView.btn_add_weight);
+        params = (RelativeLayout.LayoutParams) mWorkView.btn_add_weight.getLayoutParams();
+        params.addRule(RelativeLayout.CENTER_VERTICAL);   //在父控件中垂直居中
+        params.addRule(RelativeLayout.RIGHT_OF,mWorkView.tv_weight.getId());
+        params.width = CalFun.dip2px(this,60);
+        params.height= CalFun.dip2px(this,60);      //设置宽高
+        params.leftMargin = CalFun.dip2px(this,10);//设置左边距
+        //--------为btn_reduce_weight添加监听--------//
+        mWorkView.btn_add_weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int targetId = mWorkView.id;
+                int num = works[targetId].getWeight() + 1;
+                works[targetId].setWeight(num);
+                updateWork(targetId);
+                updatePbUnit();
+                workViews[targetId].tv_weight.setText("Weight: " + String.valueOf(num));
+            }
+        });
+        mWorkView.btn_add_weight.setLayoutParams(params);
         //--------设置btn_del的布局参数--------//
         mWorkView.relativeLayout1.addView(mWorkView.btn_del);
         params = (RelativeLayout.LayoutParams) mWorkView.btn_del.getLayoutParams();
@@ -442,7 +479,7 @@ public class MainActivity extends AppCompatActivity {
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);                       //与父控件上边界对齐
         params.width = CalFun.dip2px(this,60);
         params.height= ViewGroup.LayoutParams.WRAP_CONTENT;     //设置宽高
-        params.leftMargin = CalFun.dip2px(this,20);//设置左边距
+        params.leftMargin = CalFun.dip2px(this,10);//设置左边距
         mWorkView.et_current.setLayoutParams(params);
         ////------为et_current添加监听------////
         mWorkView.et_current.addTextChangedListener(new TextWatcher() {
@@ -470,7 +507,7 @@ public class MainActivity extends AppCompatActivity {
                         mWorkView.et_current.setText(String.valueOf(num));
                     }
                     works[targetId].setCurrent(num);
-                    currentUnit += (num-beforeChanged);
+//                    currentUnit += (num-beforeChanged);
                     updatePbUnit();
                     updateWork(targetId);
                     workViews[targetId].pv.setProgress(works[targetId].getProgress());
@@ -486,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);                       //与父控件上边界对齐
         params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         params.height= ViewGroup.LayoutParams.WRAP_CONTENT;     //设置宽高
-        params.leftMargin = CalFun.dip2px(this,20);//设置左边距
+        params.leftMargin = CalFun.dip2px(this,10);//设置左边距
         mWorkView.tv_current_2.setLayoutParams(params);
         //----------------------------------------------------------------------------------------//
         ////设置tv_total_2的布局参数
@@ -505,7 +542,7 @@ public class MainActivity extends AppCompatActivity {
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         params.width = CalFun.dip2px(this,60);
         params.height= ViewGroup.LayoutParams.WRAP_CONTENT;
-        params.rightMargin = CalFun.dip2px(this,20);
+        params.rightMargin = CalFun.dip2px(this,10);
         mWorkView.et_total.setLayoutParams(params);
         ////------为et_total添加监听------////
         mWorkView.et_total.addTextChangedListener(new TextWatcher() {
@@ -532,7 +569,7 @@ public class MainActivity extends AppCompatActivity {
                         mWorkView.et_total.setText(num);
                     }
                     works[targetId].setTotal(num);
-                    totalUnit += (num-beforeChanged);
+//                    totalUnit += (num-beforeChanged);
                     updatePbUnit();
                     updateWork(targetId);
                     workViews[targetId].pv.setProgress(works[targetId].getProgress());
@@ -694,6 +731,7 @@ public class MainActivity extends AppCompatActivity {
                 values.put(MyWork.WEIGHT,  weight);
                 db.insert(DBHelper.TB_NAME,null,values);
                 addWork(mWork);
+                popWin.dismiss();
             }
         });
 

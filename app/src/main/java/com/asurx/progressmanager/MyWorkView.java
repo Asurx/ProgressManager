@@ -14,12 +14,14 @@ public class MyWorkView {
 
     TextView          tv_name,tv_current_1,tv_current_2,tv_total_1,tv_total_2,tv_weight;
     EditText          et_current,et_total;
-    Button            btn_del,btn_reduce_current,btn_add_current,btn_reduce_total,btn_add_total;
+    Button            btn_del,btn_reduce_weight,btn_add_weight,btn_reduce_current,btn_add_current,btn_reduce_total,btn_add_total;
     MyProgressView    pv;
 
     MyWorkView(int id, LinearLayout workViewContainer,
                RelativeLayout relativeLayout1,    MyProgressView pv,    RelativeLayout relativeLayout2,
-               TextView tv_name, TextView tv_weight, Button btn_del,
+               TextView tv_name,
+               Button btn_reduce_weight, TextView tv_weight, Button btn_add_weight,
+               Button btn_del,
                TextView tv_current_1,    EditText et_current,    TextView tv_current_2,
                TextView tv_total_1,      EditText et_total,      TextView tv_total_2,
                Button btn_reduce_current,    Button btn_add_current,
@@ -32,7 +34,9 @@ public class MyWorkView {
         this.relativeLayout2 = relativeLayout2;
 
         this.tv_name   = tv_name;
+        this.btn_reduce_weight = btn_reduce_weight;
         this.tv_weight = tv_weight;
+        this.btn_add_weight = btn_add_weight;
         this.btn_del   = btn_del;
 
         this.tv_current_1 = tv_current_1;

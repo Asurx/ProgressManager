@@ -19,13 +19,25 @@
             android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
-        <!--<EditText-->
-            <!--android:layout_width="60dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/et_weight"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--/>-->
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_reduce_weight"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tv_weight"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tv_weight"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            />
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add_weight"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_weight"/>
         <Button
             android:layout_width="60dp"
             android:layout_height="wrap_content"

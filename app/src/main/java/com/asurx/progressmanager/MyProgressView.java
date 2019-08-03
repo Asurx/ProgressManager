@@ -30,9 +30,7 @@ public class MyProgressView extends View {
     private float  mTextSize;//进度条文字大小
     private String mText = "0%";  //显示进度的字符串
 
-    private int progress;
-    private int total;
-    private float mProgress=0;//进度
+    private float mProgress = 0;//进度
 
     private float mBubbleTriangleHeight = 10;//三角形高度
     private float mRad = 5;//气泡圆角
@@ -49,8 +47,8 @@ public class MyProgressView extends View {
         mContext = context;
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.MyProgressView);
-        total    = array.getInteger(R.styleable.MyProgressView_total, 100);
-        progress = array.getInteger(R.styleable.MyProgressView_progress, 0);
+//        total    = array.getInteger(R.styleable.MyProgressView_total, 100);
+//        progress = array.getInteger(R.styleable.MyProgressView_progress, 0);
         mHeight = array.getInteger(R.styleable.MyProgressView_barHeight, 10);
 
         mColorBack      = array.getColor(R.styleable.MyProgressView_bgColor,context.getColor(R.color.grey));
@@ -151,10 +149,10 @@ public class MyProgressView extends View {
         canvas.drawText(mText,rectF.centerX(),rectF.centerY()+i,mPaintText);//绘制文字（将文字绘制在气泡矩形的中心点位置）
     }
 
-    public void setTotal(int total){
-        this.total = total;
-        invalidate();
-    }
+//    public void setTotal(int total){
+//        this.total = total;
+//        invalidate();
+//    }
 
     public void setProgress(float progress){
         this.mProgress = progress;
