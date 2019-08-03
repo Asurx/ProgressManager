@@ -392,8 +392,8 @@ public class MainActivity extends AppCompatActivity {
         params = (RelativeLayout.LayoutParams) mWorkView.btn_reduce_weight.getLayoutParams();
         params.addRule(RelativeLayout.CENTER_VERTICAL);   //在父控件中垂直居中
         params.addRule(RelativeLayout.LEFT_OF,mWorkView.tv_weight.getId());
-        params.width = CalFun.dip2px(this,60);
-        params.height= CalFun.dip2px(this,60);      //设置宽高
+        params.width = CalFun.dip2px(this,40);
+        params.height= CalFun.dip2px(this,40);      //设置宽高
         params.rightMargin = CalFun.dip2px(this,10);//设置右边距
         //--------为btn_reduce_weight添加监听--------//
         mWorkView.btn_reduce_weight.setOnClickListener(new View.OnClickListener() {
@@ -422,8 +422,8 @@ public class MainActivity extends AppCompatActivity {
         params = (RelativeLayout.LayoutParams) mWorkView.btn_add_weight.getLayoutParams();
         params.addRule(RelativeLayout.CENTER_VERTICAL);   //在父控件中垂直居中
         params.addRule(RelativeLayout.RIGHT_OF,mWorkView.tv_weight.getId());
-        params.width = CalFun.dip2px(this,60);
-        params.height= CalFun.dip2px(this,60);      //设置宽高
+        params.width = CalFun.dip2px(this,40);
+        params.height= CalFun.dip2px(this,40);      //设置宽高
         params.leftMargin = CalFun.dip2px(this,10);//设置左边距
         //--------为btn_reduce_weight添加监听--------//
         mWorkView.btn_add_weight.setOnClickListener(new View.OnClickListener() {
@@ -731,6 +731,10 @@ public class MainActivity extends AppCompatActivity {
                 values.put(MyWork.WEIGHT,  weight);
                 db.insert(DBHelper.TB_NAME,null,values);
                 addWork(mWork);
+
+                isPwShowing = false;
+                fabAdd.setTranslationY(CalFun.dip2px(mContext,0));
+                fabAdd.setRotation(0);
                 popWin.dismiss();
             }
         });
