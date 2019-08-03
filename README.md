@@ -6,4 +6,4 @@
 
 #### Demo-1版本 &emsp; *2019.8.3* &emsp; [下载Demo-1](https://github.com/Asurx/ProgressManager/raw/master/_APKs/release/ProgressManagerDemo-1.apk)
 > *1. 修复Weight无效问题*\
-> *2. 增加Weight修改按钮*\
+> *2. 增加Weight修改按钮*
